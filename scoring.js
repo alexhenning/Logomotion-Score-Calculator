@@ -62,22 +62,11 @@ function getRow(parent) {
 
 //
 function updateScore() {
-    var autonScore = 0, teleopScore = 0, raceScore = 0, score = 0;
-    autonScore = getAutonScore();
-    for (var row = 0; row < grid.length; row++) {
-	if (isLogo(grid[row][0], grid[row][1], grid[row][2])) {
-	    teleopScore += 2 * getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
-	} else {
-	    teleopScore += getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
-	}
-	if (isLogo(grid[row][3], grid[row][4], grid[row][5])) {
-	    teleopScore += 2 * getScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
-	} else {
-	    teleopScore += getScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
-	}
-    }
-    raceScore = getRaceScore();
-    score = autonScore + teleopScore + raceScore;
+    var autonScore = getAutonScore();
+    var teleopScore = getTeleopScore();
+    var raceScore = getRaceScore();
+    var score = autonScore + teleopScore + raceScore;
+
     $("#auton-score").text(autonScore);
     $("#teleop-score").text(teleopScore);
     $("#race-score").text(raceScore);
@@ -97,14 +86,29 @@ function getAutonScore() {
     }
     return score;
 }
-function getScore(value, p1, p2, p3) {
+function getTeleopScore() {
+    var score = 0;
+    for (var row = 0; row < grid.length; row++) {
+	score += getGroupScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
+	score += getGroupScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
+    }
+    return score;
+}
+function getGroupScore(value, p1, p2, p3) {
+    var multiplier = 1;
     var tubes = 0;
     var pegs = [p1, p2, p3];
     for (var peg = 0; peg < pegs.length; peg++) {
-	if (pegs[peg].tube != NONE) { tubes += 1; }
-	if (pegs[peg].hasUber) { tubes += 1; }
+	if (pegs[peg].tube != NONE && pegs[peg].uberTube) {
+	    tubes += 2;
+	} else if (pegs[peg].tube != NONE && !pegs[peg].uberTube) {
+	    tubes += 1;
+	}
     }
-    return tubes * value;
+    if (isLogo(p1, p2, p3)) {
+	multiplier = 2;
+    }
+    return tubes * value * multiplier;
 }
 function getRaceScore() {
     var score = 0;
