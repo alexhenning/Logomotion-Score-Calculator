@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>FIRST Robotics Team 348's Logomotion Score Calculator</title>
+    <script type="text/javascript" src="./jquery.js"></script>
+    <script type="text/javascript" src="./jquery.rightClick.js"></script>
+    <script language="javascript" src="./scoring.js"></script>
+    <style type="text/css">
+      body {
+         background-color: black;
+         color: lightgray;
+      }
+      img {
+         padding: 5px;
+      }
+      h1 {
+         color: lightgray;
+      }
+      .peg {
+         color: white;
+	 background-color: black;
+         border: 2px solid gray;
+         width: 100px;
+         height: 100px;
+         margin: 10px;
+         float: left;
+      }
+      .row {
+	 background-color: black;
+         display: block;
+         float: left;
+      }
+      .minibot {
+         text-position: center;
+         padding: 10px;
+         border: 2px solid dimgray;
+         background-color: black;
+         color: lightgray;
+      }
+      .active {
+         background-color: dimgray;
+      }
+      #wrapper {
+         max-width: 944px;
+         margin: auto;
+         margin-top: 20px;
+      }
+      #pegs {
+         float: left;
+         width: 744px;
+         height: 372px;
+      }
+      #race {
+         float: left;
+         width: 200px;
+         height: 300px;
+      }
+      #scores {
+         float: left;
+         width: 200px;
+         height: 124;
+         color: lightgray;
+      }
+      #instructions {
+         float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1>FIRST Robotics Team 348's Logomotion Score Calculator</h1>
+      <div id="pegs">
+        <div class="row" id="top"></div>
+	<div class="row" id="middle"></div>
+	<div class="row" id="bottom"></div>
+      </div>
+      <div id="race">
+      </div>
+      <div id="scores">
+	Autonomous score: <span id="auton-score">0</span><br/>
+	Teleop score: <span id="teleop-score">0</span><br/>
+	Race score: <span id="race-score">0</span><br/>
+	<b>Total score: <span id="score">0</span></b>
+      </div>
+      <div id="instrucions">
+	<b>Usage:</b>
+	<ul>
+	  <li>Left click on a peg to cycle through the three normal tubes: triangle, circle and square. </li>
+	  <li>Right click on a peg to place or remove an ubertube.</li>
+	  <li>Click to the race buttons to toggle whether or not you won a race.</li>
+	  <li>You're score should appear in the lower right hand corner.</li>
+	</ul>
+	<p>If none of this makes sense to you, you should check <a href="http://www.usfirst.org/roboticsprograms/frc/default.aspx?id=966">FIRST robotics.</a></p>
+      </div>
+    <div>
+    <script language="javascript">
+      $(document).ready(function() {
+          main();
+      })</script>
+  </body>
+</html>
