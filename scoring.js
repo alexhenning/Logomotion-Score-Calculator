@@ -36,21 +36,23 @@ Peg.prototype.dblClickHandler = function() {
 var race;
 var RACE_SCORE = [30, 20, 15, 10];
 var RACE_POSITION = ["First", "Second", "Third", "Fourth"];
-function initRace() {
-    race = [false, false, false, false];
-    for (var i = 0; i < race.length; i++) {
-	var n = i;
-	var html = $("<div class='minibot'>");
-	html.appendTo($("#race"));
-	html.text(RACE_POSITION[n] + "place (" + RACE_SCORE[n] + " points)");
-	html.click(
-	    function() {
-		race[n] = !race[n];
-		html.toggleClass("active");
-		updateScore();
-	    });
-    }
+function Racer(place, points) {
+    this.html = $("<div class='minibot'>");
+    this.html.appendTo($("#race"));
+    this.html.text(place+" place ("+points+" points)");
+    this.points = points;
+    this.value = false;
+    var obj = this;
+    this.html.click(function() { obj.handleClick(); });
 }
+Racer.prototype.handleClick = function() {
+    this.value = !this.value;
+    this.html.toggleClass("active");
+    updateScore();
+};
+Racer.prototype.getScore = function() {
+    return this.value ? this.points : 0;
+};
 
 //
 function getRow(parent) {
@@ -95,14 +97,15 @@ function getScore(value, p1, p2, p3) {
 function getRaceScore() {
     var score = 0;
     for (var i = 0; i < race.length; i++) {
-	if (race[i]) {
-	    score += RACE_SCORE[i];
-	}
+	score += race[i].getScore();
     }
     return score;
 }
 
 function main() {
     grid = [getRow("#top"), getRow("#middle"), getRow("#bottom")];
-    initRace();
+    race = [new Racer(RACE_POSITION[0], RACE_SCORE[0]),
+	    new Racer(RACE_POSITION[1], RACE_SCORE[1]),
+	    new Racer(RACE_POSITION[2], RACE_SCORE[2]),
+	    new Racer(RACE_POSITION[3], RACE_SCORE[3])];
 }
