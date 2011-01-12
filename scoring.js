@@ -18,7 +18,7 @@ function Peg(raised, parent) {
 
     var obj = this;
     this.html.click(function() { obj.clickHandler(); });
-    this.html.dblclick(function() { obj.dblClickHandler(); });
+    this.html.rightClick(function() { obj.rightClickHandler(); });
 }
 Peg.prototype.clickHandler = function() {
     this.tube += 1;
@@ -26,7 +26,7 @@ Peg.prototype.clickHandler = function() {
     this.html.css("background-color", COLORS[this.tube]);
     updateScore();
 };
-Peg.prototype.dblClickHandler = function() {
+Peg.prototype.rightClickHandler = function() {
     this.uberTube = !this.uberTube;
     this.html.css("border-color", this.uberTube ? "yellow" : "gray");
     updateScore();
