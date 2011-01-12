@@ -6,6 +6,12 @@
     <script type="text/javascript" src="./jquery.rightClick.js"></script>
     <script language="javascript" src="./scoring.js"></script>
     <style type="text/css">
+      body {
+         background-color: black;
+      }
+      img {
+         padding: 5px;
+      }
       .peg {
          color: white;
 	 background-color: black;
@@ -22,15 +28,18 @@
       }
       .minibot {
          text-position: center;
-         height: 23%;
-         border: 2px solid darkgray
+         padding: 10px;
+         border: 2px solid dimgray;
+         background-color: black;
+         color: lightgray;
       }
       .active {
-         background-color: green;
+         background-color: dimgray;
       }
       #wrapper {
          max-width: 944px;
          margin: auto;
+         margin-top: 20px;
       }
       #pegs {
          float: left;
@@ -40,14 +49,13 @@
       #race {
          float: left;
          width: 200px;
-         height: 188px;
-         background-color: gray;
+         height: 248px;
       }
       #scores {
          float: left;
          width: 200px;
-         height: 184px;
-         background-color: lightgray;
+         height: 124;
+         color: lightgray;
       }
     </style>
   </head>
@@ -64,7 +72,7 @@
 	Autonomous score: <span id="auton-score">0</span><br/>
 	Teleop score: <span id="teleop-score">0</span><br/>
 	Race score: <span id="race-score">0</span><br/>
-	Total score: <span id="score">0</span>
+	<b>Total score: <span id="score">0</span></b>
       </div>
     <div>
     <script language="javascript">

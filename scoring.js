@@ -7,6 +7,7 @@ var TRIANGLE = 1;
 var CIRCLE = 2;
 var SQUARE = 3;
 var COLORS = ["black", "red", "white", "blue"];
+var IMAGES = ["none.png", "triangle.png", "circle.png", "square.png"];
 
 //
 function Peg(raised, parent) {
@@ -15,6 +16,10 @@ function Peg(raised, parent) {
     this.uberTube = false;
     this.html = $("<div class='peg'>");
     this.html.appendTo(parent);
+    this.html.html("<img src='none.png'/>");
+    if (raised) {
+	this.html.css("margin-top", "-10px");
+    }
 
     var obj = this;
     this.html.click(function() { obj.clickHandler(); });
@@ -23,12 +28,12 @@ function Peg(raised, parent) {
 Peg.prototype.clickHandler = function() {
     this.tube += 1;
     if (this.tube > SQUARE) { this.tube = NONE; }
-    this.html.css("background-color", COLORS[this.tube]);
+    this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
 };
 Peg.prototype.rightClickHandler = function() {
     this.uberTube = !this.uberTube;
-    this.html.css("border-color", this.uberTube ? "yellow" : "gray");
+    this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
 }
 
