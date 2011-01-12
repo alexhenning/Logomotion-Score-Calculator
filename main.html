@@ -1,16 +1,20 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Flocking Test</title>
+    <title>FIRST Robotics Team 348's Logomotion Score Calculator</title>
     <script type="text/javascript" src="./jquery.js"></script>
     <script type="text/javascript" src="./jquery.rightClick.js"></script>
     <script language="javascript" src="./scoring.js"></script>
     <style type="text/css">
       body {
          background-color: black;
+         color: lightgray;
       }
       img {
          padding: 5px;
+      }
+      h1 {
+         color: lightgray;
       }
       .peg {
          color: white;
@@ -49,7 +53,7 @@
       #race {
          float: left;
          width: 200px;
-         height: 248px;
+         height: 300px;
       }
       #scores {
          float: left;
@@ -57,10 +61,14 @@
          height: 124;
          color: lightgray;
       }
+      #instructions {
+         float: left;
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
+      <h1>FIRST Robotics Team 348's Logomotion Score Calculator</h1>
       <div id="pegs">
         <div class="row" id="top"></div>
 	<div class="row" id="middle"></div>
@@ -73,6 +81,16 @@
 	Teleop score: <span id="teleop-score">0</span><br/>
 	Race score: <span id="race-score">0</span><br/>
 	<b>Total score: <span id="score">0</span></b>
+      </div>
+      <div id="instrucions">
+	<b>Usage:</b>
+	<ul>
+	  <li>Left click on a peg to cycle through the three normal tubes: triangle, circle and square. </li>
+	  <li>Right click on a peg to place or remove an ubertube.</li>
+	  <li>Click to the race buttons to toggle whether or not you won a race.</li>
+	  <li>You're score should appear in the lower right hand corner.</li>
+	</ul>
+	<p>If none of this makes sense to you, you should check <a href="http://www.usfirst.org/roboticsprograms/frc/default.aspx?id=966">FIRST robotics.</a></p>
       </div>
     <div>
     <script language="javascript">
