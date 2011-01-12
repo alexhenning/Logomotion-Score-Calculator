@@ -32,6 +32,26 @@ Peg.prototype.dblClickHandler = function() {
     updateScore();
 }
 
+// Race
+var race;
+var RACE_SCORE = [30, 20, 15, 10];
+var RACE_POSITION = ["First", "Second", "Third", "Fourth"];
+function initRace() {
+    race = [false, false, false, false];
+    for (var i = 0; i < race.length; i++) {
+	var n = i;
+	var html = $("<div class='minibot'>");
+	html.appendTo($("#race"));
+	html.text(RACE_POSITION[n] + "place (" + RACE_SCORE[n] + " points)");
+	html.click(
+	    function() {
+		race[n] = !race[n];
+		html.toggleClass("active");
+		updateScore();
+	    });
+    }
+}
+
 //
 function getRow(parent) {
     return [new Peg(false, parent), new Peg(true, parent), new Peg(false, parent),
@@ -40,20 +60,25 @@ function getRow(parent) {
 
 //
 function updateScore() {
-    var score = 0;
+    var autonScore = 0, teleopScore = 0, raceScore = 0, score = 0;
     for (var row = 0; row < grid.length; row++) {
 	if (isLogo(grid[row][0], grid[row][1], grid[row][2])) {
-	    score += 2 * getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
+	    teleopScore += 2 * getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
 	} else {
-	    score += getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
+	    teleopScore += getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
 	}
 	if (isLogo(grid[row][3], grid[row][4], grid[row][5])) {
-	    score += 2 * getScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
+	    teleopScore += 2 * getScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
 	} else {
-	    score += getScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
+	    teleopScore += getScore(3-row, grid[row][3], grid[row][4], grid[row][5]);
 	}
     }
-    $("#score").text("Score = "+score);
+    raceScore = getRaceScore();
+    score = autonScore + teleopScore + raceScore;
+    $("#auton-score").text(autonScore);
+    $("#teleop-score").text(teleopScore);
+    $("#race-score").text(raceScore);
+    $("#score").text(score);
 }
 function isLogo(p1, p2, p3) {
     return (p1.tube == TRIANGLE) && (p2.tube == CIRCLE) && (p3.tube == SQUARE);
@@ -67,7 +92,17 @@ function getScore(value, p1, p2, p3) {
     }
     return tubes * value;
 }
+function getRaceScore() {
+    var score = 0;
+    for (var i = 0; i < race.length; i++) {
+	if (race[i]) {
+	    score += RACE_SCORE[i];
+	}
+    }
+    return score;
+}
 
 function main() {
     grid = [getRow("#top"), getRow("#middle"), getRow("#bottom")];
+    initRace();
 }
