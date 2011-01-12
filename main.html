@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Flocking Test</title>
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script language="javascript" src="./scoring.js"></script>
+    <style type="text/css">
+      .peg {
+         color: white;
+	 background-color: black;
+         border: 2px solid gray;
+         width: 100px;
+         height: 100px;
+         margin: 10px;
+         float: left;
+      }
+      .row {
+	 background-color: black;
+         display: block;
+         float: left;
+      }
+      #wrapper {
+         max-width: 944px;
+         margin: auto;
+      }
+      #pegs {
+         float: left;
+         width: 744px;
+         height: 372px;
+      }
+      #race {
+         float: left;
+         width: 200px;
+         height: 186px;
+         background-color: gray;
+      }
+      #scores {
+         float: left;
+         width: 200px;
+         height: 186px;
+         background-color: lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="pegs">
+        <div class="row" id="top"></div>
+	<div class="row" id="middle"></div>
+	<div class="row" id="bottom"></div>
+      </div>
+      <div id="race">
+      </div>
+      <div id="scores">
+	Autonomous score: <span id="auton-score">0</span><br/>
+	Teleop score: <span id="teleop-score">0</span><br/>
+	Race score: <span id="race-score">0</span><br/>
+	Total score: <span id="score">0</span>
+      </div>
+    <div>
+    <script language="javascript">
+      $(document).ready(function() {
+          main();
+      })</script>
+  </body>
+</html>
