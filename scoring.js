@@ -63,6 +63,7 @@ function getRow(parent) {
 //
 function updateScore() {
     var autonScore = 0, teleopScore = 0, raceScore = 0, score = 0;
+    autonScore = getAutonScore();
     for (var row = 0; row < grid.length; row++) {
 	if (isLogo(grid[row][0], grid[row][1], grid[row][2])) {
 	    teleopScore += 2 * getScore(3-row, grid[row][0], grid[row][1], grid[row][2]);
@@ -84,6 +85,17 @@ function updateScore() {
 }
 function isLogo(p1, p2, p3) {
     return (p1.tube == TRIANGLE) && (p2.tube == CIRCLE) && (p3.tube == SQUARE);
+}
+function getAutonScore() {
+    var score = 0;
+    for (var row = 0; row < grid.length; row++) {
+	for (var peg = 0; peg < grid[row].length; peg++) {
+	    if (grid[row][peg].uberTube) {
+		score += 2 * (3 - row);
+	    }
+	}
+    }
+    return score;
 }
 function getScore(value, p1, p2, p3) {
     var tubes = 0;
