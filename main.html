@@ -19,11 +19,12 @@
       .peg {
          color: white;
 	 background-color: black;
-         border: 2px solid gray;
+         border: 0px solid gray;
          width: 100px;
          height: 100px;
          margin: 10px;
          float: left;
+         cursor: pointer;
       }
       .row {
 	 background-color: black;
@@ -36,6 +37,11 @@
          border: 2px solid dimgray;
          background-color: black;
          color: lightgray;
+         cursor: pointer;
+         -moz-user-select: none;
+         -khtml-user-select: none;
+         -webkit-user-select: none;
+         user-select: none;
       }
       .active {
          background-color: dimgray;
