@@ -1,4 +1,7 @@
 
+/**
+ * Code for the grid of pegs
+ */
 var grid;
 
 // Tube enums
@@ -9,7 +12,7 @@ var SQUARE = 3;
 var COLORS = ["black", "red", "white", "blue"];
 var IMAGES = ["none.png", "triangle.png", "circle.png", "square.png"];
 
-//
+// Peg class, each peg is represented by it's own class that handles itself
 function Peg(raised, parent) {
     this.raised = raised;
     this.tube = NONE;
@@ -35,12 +38,24 @@ Peg.prototype.rightClickHandler = function() {
     this.uberTube = !this.uberTube;
     this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
+};
+
+// Generates a row of pegs
+function getRow(parent) {
+    return [new Peg(false, parent), new Peg(true, parent), new Peg(false, parent),
+	    new Peg(false, parent), new Peg(true, parent), new Peg(false, parent)];
 }
 
-// Race
+/**
+ * Code for the minibots race
+ */
 var race;
+
+// Race enums
 var RACE_SCORE = [30, 20, 15, 10];
 var RACE_POSITION = ["First", "Second", "Third", "Fourth"];
+
+// Class that handles button toggling for each place in the race
 function Racer(place, points) {
     this.html = $("<div class='minibot'>");
     this.html.appendTo($("#race"));
@@ -59,13 +74,9 @@ Racer.prototype.getScore = function() {
     return this.value ? this.points : 0;
 };
 
-//
-function getRow(parent) {
-    return [new Peg(false, parent), new Peg(true, parent), new Peg(false, parent),
-	    new Peg(false, parent), new Peg(true, parent), new Peg(false, parent)];
-}
-
-//
+/**
+ * Code for updating the score
+ */
 function updateScore() {
     var autonScore = getAutonScore();
     var teleopScore = getTeleopScore();
@@ -123,6 +134,7 @@ function getRaceScore() {
     return score;
 }
 
+// Main loop for initiating the game
 function main() {
     grid = [getRow("#top"), getRow("#middle"), getRow("#bottom")];
     race = [new Racer(RACE_POSITION[0], RACE_SCORE[0]),
