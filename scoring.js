@@ -18,7 +18,7 @@ function Peg(raised, parent) {
     this.html.appendTo(parent);
     this.html.html("<img src='none.png'/>");
     if (raised) {
-	this.html.css("margin-top", "-10px");
+	this.html.css("margin-top", "-20px");
     }
 
     var obj = this;

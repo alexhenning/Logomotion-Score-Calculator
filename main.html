@@ -19,11 +19,12 @@
       .peg {
          color: white;
 	 background-color: black;
-         border: 2px solid gray;
+         border: 0px solid gray;
          width: 100px;
          height: 100px;
          margin: 10px;
          float: left;
+         cursor: pointer;
       }
       .row {
 	 background-color: black;
@@ -36,6 +37,11 @@
          border: 2px solid dimgray;
          background-color: black;
          color: lightgray;
+         cursor: pointer;
+         -moz-user-select: none;
+         -khtml-user-select: none;
+         -webkit-user-select: none;
+         user-select: none;
       }
       .active {
          background-color: dimgray;
@@ -49,11 +55,12 @@
          float: left;
          width: 744px;
          height: 372px;
+         margin-top: 10px;
       }
       #race {
          float: left;
          width: 200px;
-         height: 300px;
+         height: 320px;
       }
       #scores {
          float: left;
@@ -62,19 +69,41 @@
          color: lightgray;
       }
       #instructions {
-         float: left;
+         margin: auto;
+         max-width: 600px;
+      }
+      #subtitle {
+         margin-top: -1em;
+         margin-bottom: 1em;
+      }
+      .hidden {
+         display: none;
       }
     </style>
   </head>
   <body>
+    <div id="preload" class="hidden">
+      <img src="none.png"/>
+      <img src="triangle.png"/>
+      <img src="circle.png"/>
+      <img src="square.png"/>
+      <img src="uber_none.png"/>
+      <img src="uber_triangle.png"/>
+      <img src="uber_circle.png"/>
+      <img src="uber_square.png"/>
+    </div>
     <div id="wrapper">
-      <h1>FIRST Robotics Team 348's Logomotion Score Calculator</h1>
+      <center>
+	<h1>FIRST Robotics Team 348's Logomotion Score Calculator</h1>
+	<div id="subtitle"><a href="http://norwellrobotics.com/">Team 348 web site</a> &mdash; Thanks to team 103 for <a href="http://www.chiefdelphi.com/forums/showthread.php?t=88417&highlight=score+java">the idea</a></div>
+      </center>
       <div id="pegs">
         <div class="row" id="top"></div>
 	<div class="row" id="middle"></div>
 	<div class="row" id="bottom"></div>
       </div>
       <div id="race">
+	<center><h2>Race</h2></center>
       </div>
       <div id="scores">
 	Autonomous score: <span id="auton-score">0</span><br/>
@@ -82,14 +111,15 @@
 	Race score: <span id="race-score">0</span><br/>
 	<b>Total score: <span id="score">0</span></b>
       </div>
-      <div id="instrucions">
+      <div id="instructions">
 	<b>Usage:</b>
 	<ul>
 	  <li>Left click on a peg to cycle through the three normal tubes: triangle, circle and square. </li>
 	  <li>Right click on a peg to place or remove an ubertube.</li>
-	  <li>Click to the race buttons to toggle whether or not you won a race.</li>
-	  <li>You're score should appear in the lower right hand corner.</li>
+	  <li>Click the race buttons to toggle whether or not you won a race.</li>
+	  <li>Your score should appear in the lower right hand corner.</li>
 	</ul>
+	<p><b>Note:</b> According to the rules you can't place more than three ubertubes or win more to spots in the minibot race, however, there is currently nothing preventing you from doing either of those in this calculator.</p>
 	<p>If none of this makes sense to you, you should check <a href="http://www.usfirst.org/roboticsprograms/frc/default.aspx?id=966">FIRST robotics.</a></p>
       </div>
     <div>
