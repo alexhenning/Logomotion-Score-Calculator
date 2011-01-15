@@ -27,6 +27,8 @@ function Peg(raised, parent) {
     var obj = this;
     this.html.click(function() { obj.clickHandler(); });
     this.html.rightClick(function() { obj.rightClickHandler(); });
+    this.html.bind("touchstart", function(e) { obj.touchStart(e); });
+    this.html.bind("touchend", function(e) { obj.touchEnd(e); });
 }
 Peg.prototype.clickHandler = function() {
     this.tube += 1;
@@ -38,6 +40,23 @@ Peg.prototype.rightClickHandler = function() {
     this.uberTube = !this.uberTube;
     this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
+};
+// Code for handling touch screens
+Peg.prototype.touchStart = function(e) {
+    e.preventDefault();
+    this.pressStartTime = (new Date()).getTime();
+    this.handledTouch = false;
+    var obj = this;
+    this.timerId = setTimeout(function() {obj.rightClickHandler();}, 200);
+};
+Peg.prototype.touchEnd = function(e) {
+    e.preventDefault();
+    clearTimeout(this.timerId);
+    var delta = (new Date()).getTime() - this.pressStartTime;
+    console.log(delta);
+    if (delta <= 200) {
+	this.clickHandler();
+    }
 };
 
 // Generates a row of pegs
