@@ -18,13 +18,16 @@
       h1 {
          color: lightgray;
       }
+      h2 {
+         margin-top: 0px;
+      }
       .peg {
          color: white;
 	 background-color: black;
          border: 0px solid gray;
          width: 100px;
          height: 100px;
-         margin: 10px;
+         margin: 5px;
          float: left;
          cursor: pointer;
       }
@@ -48,27 +51,41 @@
       .active {
          background-color: dimgray;
       }
+      .tube {
+         position: absolute;
+         margin: 0px;
+         padding: 0px;
+      } 
       #wrapper {
-         max-width: 944px;
+         width: 744px;
          margin: auto;
-         margin-top: 20px;
+         margin-top: -10px;
       }
       #pegs {
          float: left;
-         width: 744px;
-         height: 372px;
-         margin-top: 10px;
+         margin: auto;
+         margin-top: 15px;
       }
       #race {
          float: left;
          width: 200px;
-         height: 320px;
+         height: 222px;
+         margin: 10px;
+      }
+      #bin {
+         float: left;
+         width: 238px;
+         height: 100px;      
+         margin: 10px;
+         border: 8px dimgray solid;
+         padding: 55px 25px;
       }
       #scores {
          float: left;
          width: 200px;
-         height: 124;
+         height: 252px;
          color: lightgray;
+         display: block;
       }
       #errors {
          color: red;
@@ -88,6 +105,7 @@
   </head>
   <body>
     <div id="preload" class="hidden">
+      <img src="blank.png"/>
       <img src="none.png"/>
       <img src="triangle.png"/>
       <img src="circle.png"/>
@@ -97,11 +115,11 @@
       <img src="uber_circle.png"/>
       <img src="uber_square.png"/>
     </div>
-    <div id="wrapper">
       <center>
 	<h1>FIRST Robotics Team 348's Logomotion Score Calculator</h1>
 	<div id="subtitle"><a href="http://norwellrobotics.com/">Team 348 web site</a> &mdash; Thanks to team 103 for <a href="http://www.chiefdelphi.com/forums/showthread.php?t=88417&highlight=score+java">the idea</a></div>
       </center>
+    <div id="wrapper">
       <div id="pegs">
         <div class="row" id="top"></div>
 	<div class="row" id="middle"></div>
@@ -110,6 +128,8 @@
       <div id="race">
 	<center><h2>Race</h2></center>
       </div>
+      <div id="bin">
+      </div>
       <div id="scores">
 	Autonomous score: <span id="auton-score">0</span><br/>
 	Teleop score: <span id="teleop-score">0</span><br/>
@@ -117,18 +137,17 @@
 	<b>Total score: <span id="score">0</span></b>
 	<div id="errors"></div>
       </div>
-      <div id="instructions">
-	<b>Usage:</b>
-	<ul>
-	  <li>Left click on a peg to cycle through the three normal tubes: triangle, circle and square. </li>
-	  <li>Right click (press and hold on ipad or other touch device) on a peg to place or remove an ubertube.</li>
-	  <li>Click the race buttons to toggle whether or not you won a race.</li>
-	  <li>Your score should appear in the lower right hand corner.</li>
-	</ul>
-	<p><b>Note:</b> According to the rules you can't place more than three ubertubes, however, there is currently nothing preventing you from doing this in the calculator.</p>
-	<p>If none of this makes sense to you, you should check <a href="http://www.usfirst.org/roboticsprograms/frc/default.aspx?id=966">FIRST robotics.</a></p>
-      </div>
-    <div>
+    </div>
+    <div id="instructions">
+      <b>Usage:</b>
+      <ul>
+	<li>Left click on a peg to cycle through the three normal tubes: triangle, circle and square. </li>
+	<li>Drag the yellow ubertubes from the bin onto the pegs to place them. You can drag them off to remove them.</li>
+	<li>Click the race buttons to toggle whether or not you won a race.</li>
+	<li>Your score should appear in the lower right hand corner.</li>
+      </ul>
+      <p>If none of this makes sense to you, you should check <a href="http://www.usfirst.org/roboticsprograms/frc/default.aspx?id=966">FIRST robotics.</a></p>
+    </div>
     <script language="javascript">
       $(document).ready(function() {
           main();
