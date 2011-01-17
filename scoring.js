@@ -120,7 +120,7 @@ UberTube.prototype.handleMouseUp = function(e) {
     var handled = false;
     for (var row = 0; row < grid.length; row++) {
 	for (var i = 0; i < grid[row].length; i++) {
-	    if (grid[row][i].contains(e.pageX, e.pageY)) {
+	    if (grid[row][i].contains(e.pageX, e.pageY) && !grid[row][i].uberTube) {
 		grid[row][i].rightClickHandler();
 		this.container = grid[row][i];
 		this.html.css("left", grid[row][i].html.attr("offsetLeft"));
