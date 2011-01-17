@@ -95,9 +95,10 @@ function UberTube() {
 UberTube.prototype.handleMouseDown = function(e) {
     e.preventDefault();
     this.clicked = true;
+    this.startTime = (new Date()).getTime();
+
     this.html.removeClass("inBin");
     this.html.toggleClass("movingTube");
-    this.html.attr("src", "uber_none.png");
     this.html.css("top", (e.pageY-45)+"px");
     this.html.css("left", (e.pageX-45)+"px");
     if (this.container instanceof Peg) {
@@ -109,6 +110,11 @@ UberTube.prototype.handleMouseMove = function(e) {
 	e.preventDefault();
 	this.html.css("top", (e.pageY-45)+"px");
 	this.html.css("left", (e.pageX-45)+"px");
+
+	var delta = (new Date()).getTime() - this.startTime;
+	if (delta > 200) {
+	    this.html.attr("src", "uber_none.png");
+	}
     }
 };
 UberTube.prototype.handleMouseUp = function(e) {
@@ -117,10 +123,11 @@ UberTube.prototype.handleMouseUp = function(e) {
     this.html.toggleClass("movingTube");
     this.html.css("position", "absolute");
 
-    var handled = false;
+    var handled = false, samePeg = false;
     for (var row = 0; row < grid.length; row++) {
 	for (var i = 0; i < grid[row].length; i++) {
 	    if (grid[row][i].contains(e.pageX, e.pageY) && !grid[row][i].uberTube) {
+		if (this.container == grid[row][i]) { samePeg = true; }
 		grid[row][i].rightClickHandler();
 		this.container = grid[row][i];
 		this.html.css("left", grid[row][i].html.attr("offsetLeft"));
@@ -132,6 +139,11 @@ UberTube.prototype.handleMouseUp = function(e) {
     }
     if (!handled) {
 	this.container = $("#bin");
+    }
+
+    var delta = (new Date()).getTime() - this.startTime;
+    if (handled && samePeg && (delta <= 200)) {
+	this.container.clickHandler();
     }
 };
 
