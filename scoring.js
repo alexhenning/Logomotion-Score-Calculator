@@ -253,6 +253,9 @@ function getRaceScore() {
 // Main loop for initiating the game
 function main() {
     grid = [getRow("#top"), getRow("#middle"), getRow("#bottom")];
+    for (var row = 0; row < grid.length; row++) {
+	grid[row][2].html.css("margin-right", "35px");
+    }
     race = [new Racer(RACE_POSITION[0], RACE_SCORE[0]),
 	    new Racer(RACE_POSITION[1], RACE_SCORE[1]),
 	    new Racer(RACE_POSITION[2], RACE_SCORE[2]),
