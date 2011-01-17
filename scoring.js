@@ -151,6 +151,8 @@ UberTube.prototype.handleMouseUp = function(e) {
  * Code for the minibots race
  */
 var race;
+var raceSpots = [];
+var racers = 0;
 
 // Race enums
 var RACE_SCORE = [30, 20, 15, 10];
@@ -158,6 +160,7 @@ var RACE_POSITION = ["First", "Second", "Third", "Fourth"];
 
 // Class that handles button toggling for each place in the race
 function Racer(place, points) {
+    this.num = racers; racers += 1;
     this.html = $("<div class='minibot'>");
     this.html.appendTo($("#race"));
     this.html.text(place+" place ("+points+" points)");
@@ -168,6 +171,16 @@ function Racer(place, points) {
 }
 Racer.prototype.handleClick = function() {
     this.value = !this.value;
+    if (this.value) {
+	raceSpots.push(this.num);
+    } else {
+	if (raceSpots.indexOf(this.num) != -1) {
+	    raceSpots.pop(raceSpots.indexOf(this.num));
+	}
+    }
+    while (raceSpots.length > 2) {
+	race[raceSpots.shift()].handleClick();
+    }
     this.html.toggleClass("active");
     updateScore();
 };
