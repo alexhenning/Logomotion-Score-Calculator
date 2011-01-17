@@ -96,6 +96,7 @@ UberTube.prototype.handleMouseDown = function(e) {
     e.preventDefault();
     this.clicked = true;
     this.startTime = (new Date()).getTime();
+    this.startX = e.pageX; this.startY = e.pageY;
 
     this.html.removeClass("inBin");
     this.html.toggleClass("movingTube");
@@ -111,8 +112,9 @@ UberTube.prototype.handleMouseMove = function(e) {
 	this.html.css("top", (e.pageY-45)+"px");
 	this.html.css("left", (e.pageX-45)+"px");
 
-	var delta = (new Date()).getTime() - this.startTime;
-	if (delta > 200) {
+	var delta = Math.pow(this.startX - e.pageX, 2) + 
+	            Math.pow(this.startY - e.pageY, 2);
+	if (delta > 16) {
 	    this.html.attr("src", "uber_none.png");
 	}
     }
