@@ -101,6 +101,8 @@ UberTube.prototype.handleMouseDown = function(e) {
 
     this.html.css("top", (e.pageY-45)+"px");
     this.html.css("left", (e.pageX-45)+"px");
+    this.html.css("z-index", "100");
+    this.html.css("cursor", "move");
     if (this.container instanceof Peg) {
 	this.container.rightClickHandler();
     }
@@ -121,6 +123,8 @@ UberTube.prototype.handleMouseMove = function(e) {
 UberTube.prototype.handleMouseUp = function(e) {
     e.preventDefault();
     this.clicked = false;
+    this.html.css("z-index", "99");
+    this.html.css("cursor", "pointer");
 
     var handled = false, samePeg = false;
     for (var row = 0; row < grid.length; row++) {
