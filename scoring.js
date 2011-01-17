@@ -88,19 +88,19 @@ function Racer(place, points) {
     this.html.click(function() { obj.handleClick(); });
 }
 Racer.prototype.handleClick = function() {
-    this.value = !this.value;
-    if (this.value) {
-	raceSpots.push(this.num);
-    } else {
-	if (raceSpots.indexOf(this.num) != -1) {
+    if (raceSpots.length < 2 || this.value) {
+	this.value = !this.value;
+	if (this.value) {
+	    raceSpots.push(this.num);
+	} else {
 	    raceSpots.pop(raceSpots.indexOf(this.num));
+	    $("#errors").text("");
 	}
+	this.html.toggleClass("active");
+	updateScore();
+    } else {
+	$("#errors").text("Error: Can't win the more than two places in the race, remove one first.");
     }
-    while (raceSpots.length > 2) {
-	race[raceSpots.shift()].handleClick();
-    }
-    this.html.toggleClass("active");
-    updateScore();
 };
 Racer.prototype.getScore = function() {
     return this.value ? this.points : 0;
