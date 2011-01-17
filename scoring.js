@@ -82,8 +82,9 @@ var numUBERTUBEs = 0;
 function UberTube() {
     this.num = numUBERTUBEs; numUBERTUBEs += 1;
     this.html = $("<img src='uber_none.png' />");
+    this.html.toggleClass("tube");
     this.html.appendTo($("#bin"));
-    this.html.toggleClass("inBin");
+    this.html.css("left", $("#bin").attr("offsetLeft")+(60*this.num)+45+"px");
     this.clicked = false;
     this.container = $("#bin");
 
@@ -98,8 +99,6 @@ UberTube.prototype.handleMouseDown = function(e) {
     this.startTime = (new Date()).getTime();
     this.startX = e.pageX; this.startY = e.pageY;
 
-    this.html.removeClass("inBin");
-    this.html.toggleClass("movingTube");
     this.html.css("top", (e.pageY-45)+"px");
     this.html.css("left", (e.pageX-45)+"px");
     if (this.container instanceof Peg) {
@@ -122,8 +121,6 @@ UberTube.prototype.handleMouseMove = function(e) {
 UberTube.prototype.handleMouseUp = function(e) {
     e.preventDefault();
     this.clicked = false;
-    this.html.toggleClass("movingTube");
-    this.html.css("position", "absolute");
 
     var handled = false, samePeg = false;
     for (var row = 0; row < grid.length; row++) {
