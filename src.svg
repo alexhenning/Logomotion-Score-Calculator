@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.0 r9654"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="src.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,7 +25,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="-136.42857"
+     inkscape:cx="-647.85714"
      inkscape:cy="526.18109"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -115,7 +115,7 @@
     <path
        transform="translate(-385.7143,180)"
        sodipodi:type="arc"
-       style="fill:#ffff00;fill-opacity:1;stroke:#ffff00;stroke-width:10;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#fffc00;fill-opacity:1;stroke:#9c9b2a;stroke-width:10;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="path3767-7-1"
        sodipodi:cx="328.57144"
        sodipodi:cy="455.21933"
@@ -149,6 +149,16 @@
        d="m 108.57143,258.07648 a 20,20 0 1 1 -40.000004,0 20,20 0 1 1 40.000004,0 z"
        transform="translate(-139.99999,165.71429)"
        inkscape:export-filename="/home/alex/Dropbox/javascript/logomotion-scoring/none.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#0000ff;fill-opacity:0;stroke:#7e7e7e;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       id="rect3813-2-0"
+       width="80"
+       height="80"
+       x="31.428572"
+       y="838.07648"
+       inkscape:export-filename="/home/alex/Dropbox/javascript/logomotion-scoring/blank.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
   </g>
