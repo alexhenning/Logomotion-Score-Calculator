@@ -26,9 +26,6 @@ function Peg(raised, parent) {
 
     var obj = this;
     this.html.click(function() { obj.clickHandler(); });
-    // this.html.rightClick(function() { obj.rightClickHandler(); });
-    // this.html.bind("touchstart", function(e) { obj.touchStart(e); });
-    // this.html.bind("touchend", function(e) { obj.touchEnd(e); });
 }
 Peg.prototype.clickHandler = function() {
     this.tube += 1;
@@ -36,7 +33,7 @@ Peg.prototype.clickHandler = function() {
     this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
 };
-Peg.prototype.rightClickHandler = function() {
+Peg.prototype.toggleUberTube = function() {
     this.uberTube = !this.uberTube;
     this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
@@ -47,7 +44,7 @@ Peg.prototype.touchStart = function(e) {
     this.pressStartTime = (new Date()).getTime();
     this.handledTouch = false;
     var obj = this;
-    this.timerId = setTimeout(function() {obj.rightClickHandler();}, 200);
+    this.timerId = setTimeout(function() {obj.toggleUberTube();}, 200);
 };
 Peg.prototype.touchEnd = function(e) {
     e.preventDefault();
@@ -89,9 +86,15 @@ function UberTube() {
     this.container = $("#bin");
 
     var obj = this;
-    this.html.mousedown( function(e) {obj.handleMouseDown(e);} );
-    this.html.mousemove( function(e) {obj.handleMouseMove(e);} );
-    this.html.mouseup( function(e) {obj.handleMouseUp(e);} );
+    if (navigator.userAgent.toLowerCase().search("android") != -1) { // Android device
+	this.html.bind("touchstart", function(e) { obj.handleMouseDown(e); });
+	this.html.bind("touchmove", function(e) { obj.handleMouseMove(e); });
+	this.html.bind("touchend", function(e) { obj.handleMouseUp(e); });
+    } else {
+	this.html.mousedown( function(e) {obj.handleMouseDown(e);} );
+	this.html.mousemove( function(e) {obj.handleMouseMove(e);} );
+	this.html.mouseup( function(e) {obj.handleMouseUp(e);} );
+    }
 }
 UberTube.prototype.handleMouseDown = function(e) {
     e.preventDefault();
@@ -104,10 +107,11 @@ UberTube.prototype.handleMouseDown = function(e) {
     this.html.css("z-index", "100");
     this.html.css("cursor", "move");
     if (this.container instanceof Peg) {
-	this.container.rightClickHandler();
+	this.container.toggleUberTube();
     }
 };
 UberTube.prototype.handleMouseMove = function(e) {
+    e.preventDefault();
     if (this.clicked) {
 	e.preventDefault();
 	this.html.css("top", (e.pageY-45)+"px");
@@ -131,7 +135,7 @@ UberTube.prototype.handleMouseUp = function(e) {
 	for (var i = 0; i < grid[row].length; i++) {
 	    if (grid[row][i].contains(e.pageX, e.pageY) && !grid[row][i].uberTube) {
 		if (this.container == grid[row][i]) { samePeg = true; }
-		grid[row][i].rightClickHandler();
+		grid[row][i].toggleUberTube();
 		this.container = grid[row][i];
 		this.html.css("left", grid[row][i].html.attr("offsetLeft"));
 		this.html.css("top", grid[row][i].html.attr("offsetTop"));
