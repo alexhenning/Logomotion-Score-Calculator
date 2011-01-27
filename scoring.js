@@ -38,23 +38,6 @@ Peg.prototype.toggleUberTube = function() {
     this.html.html("<img src='"+(this.uberTube ? "uber_" : "")+IMAGES[this.tube]+"'/>");
     updateScore();
 };
-// Code for handling touch screens
-Peg.prototype.touchStart = function(e) {
-    e.preventDefault();
-    this.pressStartTime = (new Date()).getTime();
-    this.handledTouch = false;
-    var obj = this;
-    this.timerId = setTimeout(function() {obj.toggleUberTube();}, 200);
-};
-Peg.prototype.touchEnd = function(e) {
-    e.preventDefault();
-    clearTimeout(this.timerId);
-    var delta = (new Date()).getTime() - this.pressStartTime;
-    console.log(delta);
-    if (delta <= 200) {
-	this.clickHandler();
-    }
-};
 // Detection of overlap of a point for ubertubes
 Peg.prototype.contains = function(px, py) {
     var x, y, w, h;
