@@ -179,17 +179,42 @@ Racer.prototype.getScore = function() {
 };
 
 /**
+ * Code for penalties
+ */
+var penalties = 0;
+
+function changePenalties(num) {
+    penalties += num;
+    if (penalties < 0) {
+	penalties = 0;
+    }
+    $("#penalty")[0].value = penalties;
+    updateScore();
+}
+
+function handlePenaltyChange() {
+    penalties = parseInt($("#penalty")[0].value);
+    if (penalties < 0) {
+	penalties = 0;
+    }
+    $("#penalty")[0].value = penalties;
+    updateScore();
+}
+
+/**
  * Code for updating the score
  */
 function updateScore() {
     var autonScore = getAutonScore();
     var teleopScore = getTeleopScore();
     var raceScore = getRaceScore();
-    var score = autonScore + teleopScore + raceScore;
+    var penaltyScore = -3 * penalties;
+    var score = autonScore + teleopScore + raceScore + penaltyScore;
 
     $("#auton-score").text(autonScore);
     $("#teleop-score").text(teleopScore);
     $("#race-score").text(raceScore);
+    $("#penalty-score").text(penaltyScore);
     $("#score").text(score);
 }
 function isLogo(p1, p2, p3) {
